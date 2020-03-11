@@ -20,26 +20,31 @@ import cl.dmix.desafiolatam.preguntadinamica.R;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentMain extends Fragment {
-    private int radioButtonValue = 0;
+
+    //Declaración de atributo TAG para el registro de depuración.
+    private final String TAG = "RADIOBUTTON";
+    //Declaración de elementos vista como atributos de clase.
     private TextView preguntaView, categoriaView;
     private RadioGroup grupoRespuestasView;
     private RadioButton respuestaUno, respuestaDos;
 
+    //Constructor del fragmento. (Vacío, generado por defecto)
     public FragmentMain() {
         // Required empty public constructor
     }
 
+    //Constructor con argumentos para el fragmento.
     public static FragmentMain newInstance(String pregunta,
                                                 String categoria,
                                                 String respuestaCorrecta,
                                                 ArrayList<String> respuestasIncorrectas){
-
+        //Se instancia el fragmento con el constructor vacío.
         FragmentMain fragment = new FragmentMain();
-        Bundle arguments = new Bundle();
-        arguments.putString("PREGUNTA", pregunta);
-        arguments.putString("CATEGORIA", categoria);
-        arguments.putString("RESPUESTA_CORRECTA", respuestaCorrecta);
-        arguments.putStringArrayList("RESPUESTAS_INCORRECTAS", respuestasIncorrectas);
+        Bundle arguments = new Bundle(); //Se instancia el Bundle Arguments.
+        arguments.putString("PREGUNTA", pregunta); //Se ingresa la Pregunta como argumento.
+        arguments.putString("CATEGORIA", categoria); //Se ingresa la Catergoría como argumento.
+        arguments.putString("RESPUESTA_CORRECTA", respuestaCorrecta); //Se ingresa la respuesta correcta como argumento.
+        arguments.putStringArrayList("RESPUESTAS_INCORRECTAS", respuestasIncorrectas); //Se ingresa la lista de respuestas inc. como argumento.
         fragment.setArguments(arguments);
         return fragment;
     }
@@ -48,8 +53,7 @@ public class FragmentMain extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
+        //Se crea el objeto View, inflando el fragento
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         final String pregunta = Objects.requireNonNull(getArguments()).getString("PREGUNTA");
@@ -84,9 +88,7 @@ public class FragmentMain extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (respuestaUno.isChecked()) {
-                    radioButtonValue = 1;
                 } else if (respuestaDos.isChecked()) {
-                    radioButtonValue = 2;
                 }
             }
         });
